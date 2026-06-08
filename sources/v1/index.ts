@@ -10,20 +10,60 @@ export type ApiServerSource = import("./apiServerSource").ApiServerSource;
 export const ApiServerSource: typeof import("./apiServerSource").ApiServerSource = null as any;
 utilities.lazyLoad(exports, ["ApiServerSource"], () => require("./apiServerSource"));
 
+export { ApiServerSourceListArgs } from "./apiServerSourceList";
+export type ApiServerSourceList = import("./apiServerSourceList").ApiServerSourceList;
+export const ApiServerSourceList: typeof import("./apiServerSourceList").ApiServerSourceList = null as any;
+utilities.lazyLoad(exports, ["ApiServerSourceList"], () => require("./apiServerSourceList"));
+
+export { ApiServerSourcePatchArgs } from "./apiServerSourcePatch";
+export type ApiServerSourcePatch = import("./apiServerSourcePatch").ApiServerSourcePatch;
+export const ApiServerSourcePatch: typeof import("./apiServerSourcePatch").ApiServerSourcePatch = null as any;
+utilities.lazyLoad(exports, ["ApiServerSourcePatch"], () => require("./apiServerSourcePatch"));
+
 export { ContainerSourceArgs } from "./containerSource";
 export type ContainerSource = import("./containerSource").ContainerSource;
 export const ContainerSource: typeof import("./containerSource").ContainerSource = null as any;
 utilities.lazyLoad(exports, ["ContainerSource"], () => require("./containerSource"));
+
+export { ContainerSourceListArgs } from "./containerSourceList";
+export type ContainerSourceList = import("./containerSourceList").ContainerSourceList;
+export const ContainerSourceList: typeof import("./containerSourceList").ContainerSourceList = null as any;
+utilities.lazyLoad(exports, ["ContainerSourceList"], () => require("./containerSourceList"));
+
+export { ContainerSourcePatchArgs } from "./containerSourcePatch";
+export type ContainerSourcePatch = import("./containerSourcePatch").ContainerSourcePatch;
+export const ContainerSourcePatch: typeof import("./containerSourcePatch").ContainerSourcePatch = null as any;
+utilities.lazyLoad(exports, ["ContainerSourcePatch"], () => require("./containerSourcePatch"));
 
 export { PingSourceArgs } from "./pingSource";
 export type PingSource = import("./pingSource").PingSource;
 export const PingSource: typeof import("./pingSource").PingSource = null as any;
 utilities.lazyLoad(exports, ["PingSource"], () => require("./pingSource"));
 
+export { PingSourceListArgs } from "./pingSourceList";
+export type PingSourceList = import("./pingSourceList").PingSourceList;
+export const PingSourceList: typeof import("./pingSourceList").PingSourceList = null as any;
+utilities.lazyLoad(exports, ["PingSourceList"], () => require("./pingSourceList"));
+
+export { PingSourcePatchArgs } from "./pingSourcePatch";
+export type PingSourcePatch = import("./pingSourcePatch").PingSourcePatch;
+export const PingSourcePatch: typeof import("./pingSourcePatch").PingSourcePatch = null as any;
+utilities.lazyLoad(exports, ["PingSourcePatch"], () => require("./pingSourcePatch"));
+
 export { SinkBindingArgs } from "./sinkBinding";
 export type SinkBinding = import("./sinkBinding").SinkBinding;
 export const SinkBinding: typeof import("./sinkBinding").SinkBinding = null as any;
 utilities.lazyLoad(exports, ["SinkBinding"], () => require("./sinkBinding"));
+
+export { SinkBindingListArgs } from "./sinkBindingList";
+export type SinkBindingList = import("./sinkBindingList").SinkBindingList;
+export const SinkBindingList: typeof import("./sinkBindingList").SinkBindingList = null as any;
+utilities.lazyLoad(exports, ["SinkBindingList"], () => require("./sinkBindingList"));
+
+export { SinkBindingPatchArgs } from "./sinkBindingPatch";
+export type SinkBindingPatch = import("./sinkBindingPatch").SinkBindingPatch;
+export const SinkBindingPatch: typeof import("./sinkBindingPatch").SinkBindingPatch = null as any;
+utilities.lazyLoad(exports, ["SinkBindingPatch"], () => require("./sinkBindingPatch"));
 
 
 const _module = {
@@ -32,12 +72,28 @@ const _module = {
         switch (type) {
             case "kubernetes:sources.knative.dev/v1:ApiServerSource":
                 return new ApiServerSource(name, <any>undefined, { urn })
+            case "kubernetes:sources.knative.dev/v1:ApiServerSourceList":
+                return new ApiServerSourceList(name, <any>undefined, { urn })
+            case "kubernetes:sources.knative.dev/v1:ApiServerSourcePatch":
+                return new ApiServerSourcePatch(name, <any>undefined, { urn })
             case "kubernetes:sources.knative.dev/v1:ContainerSource":
                 return new ContainerSource(name, <any>undefined, { urn })
+            case "kubernetes:sources.knative.dev/v1:ContainerSourceList":
+                return new ContainerSourceList(name, <any>undefined, { urn })
+            case "kubernetes:sources.knative.dev/v1:ContainerSourcePatch":
+                return new ContainerSourcePatch(name, <any>undefined, { urn })
             case "kubernetes:sources.knative.dev/v1:PingSource":
                 return new PingSource(name, <any>undefined, { urn })
+            case "kubernetes:sources.knative.dev/v1:PingSourceList":
+                return new PingSourceList(name, <any>undefined, { urn })
+            case "kubernetes:sources.knative.dev/v1:PingSourcePatch":
+                return new PingSourcePatch(name, <any>undefined, { urn })
             case "kubernetes:sources.knative.dev/v1:SinkBinding":
                 return new SinkBinding(name, <any>undefined, { urn })
+            case "kubernetes:sources.knative.dev/v1:SinkBindingList":
+                return new SinkBindingList(name, <any>undefined, { urn })
+            case "kubernetes:sources.knative.dev/v1:SinkBindingPatch":
+                return new SinkBindingPatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

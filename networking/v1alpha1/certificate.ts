@@ -6,8 +6,6 @@ import * as inputs from "../../types/input";
 import * as outputs from "../../types/output";
 import * as utilities from "../../utilities";
 
-import {ObjectMeta} from "../../meta/v1";
-
 /**
  * Certificate is responsible for provisioning a SSL certificate for the
  * given hosts. It is a Knative abstraction for various SSL certificate
@@ -40,19 +38,20 @@ export class Certificate extends pulumi.CustomResource {
         return obj['__pulumiType'] === Certificate.__pulumiType;
     }
 
-    public readonly apiVersion!: pulumi.Output<"networking.internal.knative.dev/v1alpha1" | undefined>;
-    public readonly kind!: pulumi.Output<"Certificate" | undefined>;
-    public readonly metadata!: pulumi.Output<ObjectMeta | undefined>;
     /**
-     * Spec is the desired state of the Certificate.
-     * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
      */
-    public readonly spec!: pulumi.Output<outputs.networking.v1alpha1.CertificateSpec | undefined>;
+    declare public readonly apiVersion: pulumi.Output<"networking.internal.knative.dev/v1alpha1">;
     /**
-     * Status is the current state of the Certificate.
-     * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
      */
-    public readonly status!: pulumi.Output<outputs.networking.v1alpha1.CertificateStatus | undefined>;
+    declare public readonly kind: pulumi.Output<"Certificate">;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    declare public readonly metadata: pulumi.Output<outputs.meta.v1.ObjectMeta>;
+    declare public readonly spec: pulumi.Output<outputs.networking.v1alpha1.CertificateSpec>;
+    declare public /*out*/ readonly status: pulumi.Output<outputs.networking.v1alpha1.CertificateStatus>;
 
     /**
      * Create a Certificate resource with the given unique name, arguments, and options.
@@ -67,9 +66,9 @@ export class Certificate extends pulumi.CustomResource {
         if (!opts.id) {
             resourceInputs["apiVersion"] = "networking.internal.knative.dev/v1alpha1";
             resourceInputs["kind"] = "Certificate";
-            resourceInputs["metadata"] = args ? args.metadata : undefined;
-            resourceInputs["spec"] = args ? args.spec : undefined;
-            resourceInputs["status"] = args ? args.status : undefined;
+            resourceInputs["metadata"] = args?.metadata;
+            resourceInputs["spec"] = args?.spec;
+            resourceInputs["status"] = undefined /*out*/;
         } else {
             resourceInputs["apiVersion"] = undefined /*out*/;
             resourceInputs["kind"] = undefined /*out*/;
@@ -86,17 +85,17 @@ export class Certificate extends pulumi.CustomResource {
  * The set of arguments for constructing a Certificate resource.
  */
 export interface CertificateArgs {
-    apiVersion?: pulumi.Input<"networking.internal.knative.dev/v1alpha1">;
-    kind?: pulumi.Input<"Certificate">;
-    metadata?: pulumi.Input<ObjectMeta>;
     /**
-     * Spec is the desired state of the Certificate.
-     * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
      */
-    spec?: pulumi.Input<inputs.networking.v1alpha1.CertificateSpecArgs>;
+    apiVersion?: pulumi.Input<"networking.internal.knative.dev/v1alpha1" | undefined>;
     /**
-     * Status is the current state of the Certificate.
-     * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
      */
-    status?: pulumi.Input<inputs.networking.v1alpha1.CertificateStatusArgs>;
+    kind?: pulumi.Input<"Certificate" | undefined>;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    metadata?: pulumi.Input<inputs.meta.v1.ObjectMeta | undefined>;
+    spec?: pulumi.Input<inputs.networking.v1alpha1.CertificateSpec | undefined>;
 }

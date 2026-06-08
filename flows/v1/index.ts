@@ -10,10 +10,30 @@ export type Parallel = import("./parallel").Parallel;
 export const Parallel: typeof import("./parallel").Parallel = null as any;
 utilities.lazyLoad(exports, ["Parallel"], () => require("./parallel"));
 
+export { ParallelListArgs } from "./parallelList";
+export type ParallelList = import("./parallelList").ParallelList;
+export const ParallelList: typeof import("./parallelList").ParallelList = null as any;
+utilities.lazyLoad(exports, ["ParallelList"], () => require("./parallelList"));
+
+export { ParallelPatchArgs } from "./parallelPatch";
+export type ParallelPatch = import("./parallelPatch").ParallelPatch;
+export const ParallelPatch: typeof import("./parallelPatch").ParallelPatch = null as any;
+utilities.lazyLoad(exports, ["ParallelPatch"], () => require("./parallelPatch"));
+
 export { SequenceArgs } from "./sequence";
 export type Sequence = import("./sequence").Sequence;
 export const Sequence: typeof import("./sequence").Sequence = null as any;
 utilities.lazyLoad(exports, ["Sequence"], () => require("./sequence"));
+
+export { SequenceListArgs } from "./sequenceList";
+export type SequenceList = import("./sequenceList").SequenceList;
+export const SequenceList: typeof import("./sequenceList").SequenceList = null as any;
+utilities.lazyLoad(exports, ["SequenceList"], () => require("./sequenceList"));
+
+export { SequencePatchArgs } from "./sequencePatch";
+export type SequencePatch = import("./sequencePatch").SequencePatch;
+export const SequencePatch: typeof import("./sequencePatch").SequencePatch = null as any;
+utilities.lazyLoad(exports, ["SequencePatch"], () => require("./sequencePatch"));
 
 
 const _module = {
@@ -22,8 +42,16 @@ const _module = {
         switch (type) {
             case "kubernetes:flows.knative.dev/v1:Parallel":
                 return new Parallel(name, <any>undefined, { urn })
+            case "kubernetes:flows.knative.dev/v1:ParallelList":
+                return new ParallelList(name, <any>undefined, { urn })
+            case "kubernetes:flows.knative.dev/v1:ParallelPatch":
+                return new ParallelPatch(name, <any>undefined, { urn })
             case "kubernetes:flows.knative.dev/v1:Sequence":
                 return new Sequence(name, <any>undefined, { urn })
+            case "kubernetes:flows.knative.dev/v1:SequenceList":
+                return new SequenceList(name, <any>undefined, { urn })
+            case "kubernetes:flows.knative.dev/v1:SequencePatch":
+                return new SequencePatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

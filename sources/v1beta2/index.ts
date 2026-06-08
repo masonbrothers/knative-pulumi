@@ -10,6 +10,16 @@ export type PingSource = import("./pingSource").PingSource;
 export const PingSource: typeof import("./pingSource").PingSource = null as any;
 utilities.lazyLoad(exports, ["PingSource"], () => require("./pingSource"));
 
+export { PingSourceListArgs } from "./pingSourceList";
+export type PingSourceList = import("./pingSourceList").PingSourceList;
+export const PingSourceList: typeof import("./pingSourceList").PingSourceList = null as any;
+utilities.lazyLoad(exports, ["PingSourceList"], () => require("./pingSourceList"));
+
+export { PingSourcePatchArgs } from "./pingSourcePatch";
+export type PingSourcePatch = import("./pingSourcePatch").PingSourcePatch;
+export const PingSourcePatch: typeof import("./pingSourcePatch").PingSourcePatch = null as any;
+utilities.lazyLoad(exports, ["PingSourcePatch"], () => require("./pingSourcePatch"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -17,6 +27,10 @@ const _module = {
         switch (type) {
             case "kubernetes:sources.knative.dev/v1beta2:PingSource":
                 return new PingSource(name, <any>undefined, { urn })
+            case "kubernetes:sources.knative.dev/v1beta2:PingSourceList":
+                return new PingSourceList(name, <any>undefined, { urn })
+            case "kubernetes:sources.knative.dev/v1beta2:PingSourcePatch":
+                return new PingSourcePatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

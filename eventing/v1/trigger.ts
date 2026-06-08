@@ -6,8 +6,6 @@ import * as inputs from "../../types/input";
 import * as outputs from "../../types/output";
 import * as utilities from "../../utilities";
 
-import {ObjectMeta} from "../../meta/v1";
-
 /**
  * Trigger represents a request to have events delivered to a subscriber from a Broker's event pool.
  */
@@ -38,17 +36,23 @@ export class Trigger extends pulumi.CustomResource {
         return obj['__pulumiType'] === Trigger.__pulumiType;
     }
 
-    public readonly apiVersion!: pulumi.Output<"eventing.knative.dev/v1" | undefined>;
-    public readonly kind!: pulumi.Output<"Trigger" | undefined>;
-    public readonly metadata!: pulumi.Output<ObjectMeta | undefined>;
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    declare public readonly apiVersion: pulumi.Output<"eventing.knative.dev/v1">;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    declare public readonly kind: pulumi.Output<"Trigger">;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    declare public readonly metadata: pulumi.Output<outputs.meta.v1.ObjectMeta>;
     /**
      * Spec defines the desired state of the Trigger.
      */
-    public readonly spec!: pulumi.Output<{[key: string]: any} | undefined>;
-    /**
-     * Status represents the current state of the Trigger. This data may be out of date.
-     */
-    public readonly status!: pulumi.Output<outputs.eventing.v1.TriggerStatus | undefined>;
+    declare public readonly spec: pulumi.Output<{[key: string]: any}>;
+    declare public /*out*/ readonly status: pulumi.Output<outputs.eventing.v1.TriggerStatus>;
 
     /**
      * Create a Trigger resource with the given unique name, arguments, and options.
@@ -63,9 +67,9 @@ export class Trigger extends pulumi.CustomResource {
         if (!opts.id) {
             resourceInputs["apiVersion"] = "eventing.knative.dev/v1";
             resourceInputs["kind"] = "Trigger";
-            resourceInputs["metadata"] = args ? args.metadata : undefined;
-            resourceInputs["spec"] = args ? args.spec : undefined;
-            resourceInputs["status"] = args ? args.status : undefined;
+            resourceInputs["metadata"] = args?.metadata;
+            resourceInputs["spec"] = args?.spec;
+            resourceInputs["status"] = undefined /*out*/;
         } else {
             resourceInputs["apiVersion"] = undefined /*out*/;
             resourceInputs["kind"] = undefined /*out*/;
@@ -82,15 +86,20 @@ export class Trigger extends pulumi.CustomResource {
  * The set of arguments for constructing a Trigger resource.
  */
 export interface TriggerArgs {
-    apiVersion?: pulumi.Input<"eventing.knative.dev/v1">;
-    kind?: pulumi.Input<"Trigger">;
-    metadata?: pulumi.Input<ObjectMeta>;
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    apiVersion?: pulumi.Input<"eventing.knative.dev/v1" | undefined>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    kind?: pulumi.Input<"Trigger" | undefined>;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    metadata?: pulumi.Input<inputs.meta.v1.ObjectMeta | undefined>;
     /**
      * Spec defines the desired state of the Trigger.
      */
-    spec?: pulumi.Input<{[key: string]: any}>;
-    /**
-     * Status represents the current state of the Trigger. This data may be out of date.
-     */
-    status?: pulumi.Input<inputs.eventing.v1.TriggerStatusArgs>;
+    spec?: pulumi.Input<{[key: string]: any} | undefined>;
 }

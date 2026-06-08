@@ -10,15 +10,45 @@ export type EventPolicy = import("./eventPolicy").EventPolicy;
 export const EventPolicy: typeof import("./eventPolicy").EventPolicy = null as any;
 utilities.lazyLoad(exports, ["EventPolicy"], () => require("./eventPolicy"));
 
+export { EventPolicyListArgs } from "./eventPolicyList";
+export type EventPolicyList = import("./eventPolicyList").EventPolicyList;
+export const EventPolicyList: typeof import("./eventPolicyList").EventPolicyList = null as any;
+utilities.lazyLoad(exports, ["EventPolicyList"], () => require("./eventPolicyList"));
+
+export { EventPolicyPatchArgs } from "./eventPolicyPatch";
+export type EventPolicyPatch = import("./eventPolicyPatch").EventPolicyPatch;
+export const EventPolicyPatch: typeof import("./eventPolicyPatch").EventPolicyPatch = null as any;
+utilities.lazyLoad(exports, ["EventPolicyPatch"], () => require("./eventPolicyPatch"));
+
 export { EventTransformArgs } from "./eventTransform";
 export type EventTransform = import("./eventTransform").EventTransform;
 export const EventTransform: typeof import("./eventTransform").EventTransform = null as any;
 utilities.lazyLoad(exports, ["EventTransform"], () => require("./eventTransform"));
 
+export { EventTransformListArgs } from "./eventTransformList";
+export type EventTransformList = import("./eventTransformList").EventTransformList;
+export const EventTransformList: typeof import("./eventTransformList").EventTransformList = null as any;
+utilities.lazyLoad(exports, ["EventTransformList"], () => require("./eventTransformList"));
+
+export { EventTransformPatchArgs } from "./eventTransformPatch";
+export type EventTransformPatch = import("./eventTransformPatch").EventTransformPatch;
+export const EventTransformPatch: typeof import("./eventTransformPatch").EventTransformPatch = null as any;
+utilities.lazyLoad(exports, ["EventTransformPatch"], () => require("./eventTransformPatch"));
+
 export { RequestReplyArgs } from "./requestReply";
 export type RequestReply = import("./requestReply").RequestReply;
 export const RequestReply: typeof import("./requestReply").RequestReply = null as any;
 utilities.lazyLoad(exports, ["RequestReply"], () => require("./requestReply"));
+
+export { RequestReplyListArgs } from "./requestReplyList";
+export type RequestReplyList = import("./requestReplyList").RequestReplyList;
+export const RequestReplyList: typeof import("./requestReplyList").RequestReplyList = null as any;
+utilities.lazyLoad(exports, ["RequestReplyList"], () => require("./requestReplyList"));
+
+export { RequestReplyPatchArgs } from "./requestReplyPatch";
+export type RequestReplyPatch = import("./requestReplyPatch").RequestReplyPatch;
+export const RequestReplyPatch: typeof import("./requestReplyPatch").RequestReplyPatch = null as any;
+utilities.lazyLoad(exports, ["RequestReplyPatch"], () => require("./requestReplyPatch"));
 
 
 const _module = {
@@ -27,10 +57,22 @@ const _module = {
         switch (type) {
             case "kubernetes:eventing.knative.dev/v1alpha1:EventPolicy":
                 return new EventPolicy(name, <any>undefined, { urn })
+            case "kubernetes:eventing.knative.dev/v1alpha1:EventPolicyList":
+                return new EventPolicyList(name, <any>undefined, { urn })
+            case "kubernetes:eventing.knative.dev/v1alpha1:EventPolicyPatch":
+                return new EventPolicyPatch(name, <any>undefined, { urn })
             case "kubernetes:eventing.knative.dev/v1alpha1:EventTransform":
                 return new EventTransform(name, <any>undefined, { urn })
+            case "kubernetes:eventing.knative.dev/v1alpha1:EventTransformList":
+                return new EventTransformList(name, <any>undefined, { urn })
+            case "kubernetes:eventing.knative.dev/v1alpha1:EventTransformPatch":
+                return new EventTransformPatch(name, <any>undefined, { urn })
             case "kubernetes:eventing.knative.dev/v1alpha1:RequestReply":
                 return new RequestReply(name, <any>undefined, { urn })
+            case "kubernetes:eventing.knative.dev/v1alpha1:RequestReplyList":
+                return new RequestReplyList(name, <any>undefined, { urn })
+            case "kubernetes:eventing.knative.dev/v1alpha1:RequestReplyPatch":
+                return new RequestReplyPatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

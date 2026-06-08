@@ -6,8 +6,6 @@ import * as inputs from "../../types/input";
 import * as outputs from "../../types/output";
 import * as utilities from "../../utilities";
 
-import {ObjectMeta} from "../../meta/v1";
-
 /**
  * SinkBinding describes a Binding that is also a Source. The `sink` (from the Source duck) is resolved to a URL and then projected into the `subject` by augmenting the runtime contract of the referenced containers to have a `K_SINK` environment variable holding the endpoint to which to send cloud events.
  */
@@ -38,11 +36,20 @@ export class SinkBinding extends pulumi.CustomResource {
         return obj['__pulumiType'] === SinkBinding.__pulumiType;
     }
 
-    public readonly apiVersion!: pulumi.Output<"sources.knative.dev/v1" | undefined>;
-    public readonly kind!: pulumi.Output<"SinkBinding" | undefined>;
-    public readonly metadata!: pulumi.Output<ObjectMeta | undefined>;
-    public readonly spec!: pulumi.Output<outputs.sources.v1.SinkBindingSpec | undefined>;
-    public readonly status!: pulumi.Output<outputs.sources.v1.SinkBindingStatus | undefined>;
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    declare public readonly apiVersion: pulumi.Output<"sources.knative.dev/v1">;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    declare public readonly kind: pulumi.Output<"SinkBinding">;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    declare public readonly metadata: pulumi.Output<outputs.meta.v1.ObjectMeta>;
+    declare public readonly spec: pulumi.Output<outputs.sources.v1.SinkBindingSpec>;
+    declare public /*out*/ readonly status: pulumi.Output<outputs.sources.v1.SinkBindingStatus>;
 
     /**
      * Create a SinkBinding resource with the given unique name, arguments, and options.
@@ -57,9 +64,9 @@ export class SinkBinding extends pulumi.CustomResource {
         if (!opts.id) {
             resourceInputs["apiVersion"] = "sources.knative.dev/v1";
             resourceInputs["kind"] = "SinkBinding";
-            resourceInputs["metadata"] = args ? args.metadata : undefined;
-            resourceInputs["spec"] = args ? args.spec : undefined;
-            resourceInputs["status"] = args ? args.status : undefined;
+            resourceInputs["metadata"] = args?.metadata;
+            resourceInputs["spec"] = args?.spec;
+            resourceInputs["status"] = undefined /*out*/;
         } else {
             resourceInputs["apiVersion"] = undefined /*out*/;
             resourceInputs["kind"] = undefined /*out*/;
@@ -76,9 +83,17 @@ export class SinkBinding extends pulumi.CustomResource {
  * The set of arguments for constructing a SinkBinding resource.
  */
 export interface SinkBindingArgs {
-    apiVersion?: pulumi.Input<"sources.knative.dev/v1">;
-    kind?: pulumi.Input<"SinkBinding">;
-    metadata?: pulumi.Input<ObjectMeta>;
-    spec?: pulumi.Input<inputs.sources.v1.SinkBindingSpecArgs>;
-    status?: pulumi.Input<inputs.sources.v1.SinkBindingStatusArgs>;
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    apiVersion?: pulumi.Input<"sources.knative.dev/v1" | undefined>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    kind?: pulumi.Input<"SinkBinding" | undefined>;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    metadata?: pulumi.Input<inputs.meta.v1.ObjectMeta | undefined>;
+    spec?: pulumi.Input<inputs.sources.v1.SinkBindingSpec | undefined>;
 }

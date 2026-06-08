@@ -6,8 +6,6 @@ import * as inputs from "../../types/input";
 import * as outputs from "../../types/output";
 import * as utilities from "../../utilities";
 
-import {ObjectMeta} from "../../meta/v1";
-
 /**
  * ContainerSource is an event source that starts a container image which generates events under certain situations and sends messages to a sink URI
  */
@@ -38,11 +36,20 @@ export class ContainerSource extends pulumi.CustomResource {
         return obj['__pulumiType'] === ContainerSource.__pulumiType;
     }
 
-    public readonly apiVersion!: pulumi.Output<"sources.knative.dev/v1" | undefined>;
-    public readonly kind!: pulumi.Output<"ContainerSource" | undefined>;
-    public readonly metadata!: pulumi.Output<ObjectMeta | undefined>;
-    public readonly spec!: pulumi.Output<outputs.sources.v1.ContainerSourceSpec | undefined>;
-    public readonly status!: pulumi.Output<outputs.sources.v1.ContainerSourceStatus | undefined>;
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    declare public readonly apiVersion: pulumi.Output<"sources.knative.dev/v1">;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    declare public readonly kind: pulumi.Output<"ContainerSource">;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    declare public readonly metadata: pulumi.Output<outputs.meta.v1.ObjectMeta>;
+    declare public readonly spec: pulumi.Output<outputs.sources.v1.ContainerSourceSpec>;
+    declare public /*out*/ readonly status: pulumi.Output<outputs.sources.v1.ContainerSourceStatus>;
 
     /**
      * Create a ContainerSource resource with the given unique name, arguments, and options.
@@ -57,9 +64,9 @@ export class ContainerSource extends pulumi.CustomResource {
         if (!opts.id) {
             resourceInputs["apiVersion"] = "sources.knative.dev/v1";
             resourceInputs["kind"] = "ContainerSource";
-            resourceInputs["metadata"] = args ? args.metadata : undefined;
-            resourceInputs["spec"] = args ? args.spec : undefined;
-            resourceInputs["status"] = args ? args.status : undefined;
+            resourceInputs["metadata"] = args?.metadata;
+            resourceInputs["spec"] = args?.spec;
+            resourceInputs["status"] = undefined /*out*/;
         } else {
             resourceInputs["apiVersion"] = undefined /*out*/;
             resourceInputs["kind"] = undefined /*out*/;
@@ -76,9 +83,17 @@ export class ContainerSource extends pulumi.CustomResource {
  * The set of arguments for constructing a ContainerSource resource.
  */
 export interface ContainerSourceArgs {
-    apiVersion?: pulumi.Input<"sources.knative.dev/v1">;
-    kind?: pulumi.Input<"ContainerSource">;
-    metadata?: pulumi.Input<ObjectMeta>;
-    spec?: pulumi.Input<inputs.sources.v1.ContainerSourceSpecArgs>;
-    status?: pulumi.Input<inputs.sources.v1.ContainerSourceStatusArgs>;
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    apiVersion?: pulumi.Input<"sources.knative.dev/v1" | undefined>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    kind?: pulumi.Input<"ContainerSource" | undefined>;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    metadata?: pulumi.Input<inputs.meta.v1.ObjectMeta | undefined>;
+    spec?: pulumi.Input<inputs.sources.v1.ContainerSourceSpec | undefined>;
 }

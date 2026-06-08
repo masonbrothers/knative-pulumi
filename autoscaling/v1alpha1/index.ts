@@ -10,10 +10,30 @@ export type Metric = import("./metric").Metric;
 export const Metric: typeof import("./metric").Metric = null as any;
 utilities.lazyLoad(exports, ["Metric"], () => require("./metric"));
 
+export { MetricListArgs } from "./metricList";
+export type MetricList = import("./metricList").MetricList;
+export const MetricList: typeof import("./metricList").MetricList = null as any;
+utilities.lazyLoad(exports, ["MetricList"], () => require("./metricList"));
+
+export { MetricPatchArgs } from "./metricPatch";
+export type MetricPatch = import("./metricPatch").MetricPatch;
+export const MetricPatch: typeof import("./metricPatch").MetricPatch = null as any;
+utilities.lazyLoad(exports, ["MetricPatch"], () => require("./metricPatch"));
+
 export { PodAutoscalerArgs } from "./podAutoscaler";
 export type PodAutoscaler = import("./podAutoscaler").PodAutoscaler;
 export const PodAutoscaler: typeof import("./podAutoscaler").PodAutoscaler = null as any;
 utilities.lazyLoad(exports, ["PodAutoscaler"], () => require("./podAutoscaler"));
+
+export { PodAutoscalerListArgs } from "./podAutoscalerList";
+export type PodAutoscalerList = import("./podAutoscalerList").PodAutoscalerList;
+export const PodAutoscalerList: typeof import("./podAutoscalerList").PodAutoscalerList = null as any;
+utilities.lazyLoad(exports, ["PodAutoscalerList"], () => require("./podAutoscalerList"));
+
+export { PodAutoscalerPatchArgs } from "./podAutoscalerPatch";
+export type PodAutoscalerPatch = import("./podAutoscalerPatch").PodAutoscalerPatch;
+export const PodAutoscalerPatch: typeof import("./podAutoscalerPatch").PodAutoscalerPatch = null as any;
+utilities.lazyLoad(exports, ["PodAutoscalerPatch"], () => require("./podAutoscalerPatch"));
 
 
 const _module = {
@@ -22,8 +42,16 @@ const _module = {
         switch (type) {
             case "kubernetes:autoscaling.internal.knative.dev/v1alpha1:Metric":
                 return new Metric(name, <any>undefined, { urn })
+            case "kubernetes:autoscaling.internal.knative.dev/v1alpha1:MetricList":
+                return new MetricList(name, <any>undefined, { urn })
+            case "kubernetes:autoscaling.internal.knative.dev/v1alpha1:MetricPatch":
+                return new MetricPatch(name, <any>undefined, { urn })
             case "kubernetes:autoscaling.internal.knative.dev/v1alpha1:PodAutoscaler":
                 return new PodAutoscaler(name, <any>undefined, { urn })
+            case "kubernetes:autoscaling.internal.knative.dev/v1alpha1:PodAutoscalerList":
+                return new PodAutoscalerList(name, <any>undefined, { urn })
+            case "kubernetes:autoscaling.internal.knative.dev/v1alpha1:PodAutoscalerPatch":
+                return new PodAutoscalerPatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

@@ -10,6 +10,16 @@ export type EventType = import("./eventType").EventType;
 export const EventType: typeof import("./eventType").EventType = null as any;
 utilities.lazyLoad(exports, ["EventType"], () => require("./eventType"));
 
+export { EventTypeListArgs } from "./eventTypeList";
+export type EventTypeList = import("./eventTypeList").EventTypeList;
+export const EventTypeList: typeof import("./eventTypeList").EventTypeList = null as any;
+utilities.lazyLoad(exports, ["EventTypeList"], () => require("./eventTypeList"));
+
+export { EventTypePatchArgs } from "./eventTypePatch";
+export type EventTypePatch = import("./eventTypePatch").EventTypePatch;
+export const EventTypePatch: typeof import("./eventTypePatch").EventTypePatch = null as any;
+utilities.lazyLoad(exports, ["EventTypePatch"], () => require("./eventTypePatch"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -17,6 +27,10 @@ const _module = {
         switch (type) {
             case "kubernetes:eventing.knative.dev/v1beta1:EventType":
                 return new EventType(name, <any>undefined, { urn })
+            case "kubernetes:eventing.knative.dev/v1beta1:EventTypeList":
+                return new EventTypeList(name, <any>undefined, { urn })
+            case "kubernetes:eventing.knative.dev/v1beta1:EventTypePatch":
+                return new EventTypePatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

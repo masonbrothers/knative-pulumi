@@ -10,10 +10,30 @@ export type Channel = import("./channel").Channel;
 export const Channel: typeof import("./channel").Channel = null as any;
 utilities.lazyLoad(exports, ["Channel"], () => require("./channel"));
 
+export { ChannelListArgs } from "./channelList";
+export type ChannelList = import("./channelList").ChannelList;
+export const ChannelList: typeof import("./channelList").ChannelList = null as any;
+utilities.lazyLoad(exports, ["ChannelList"], () => require("./channelList"));
+
+export { ChannelPatchArgs } from "./channelPatch";
+export type ChannelPatch = import("./channelPatch").ChannelPatch;
+export const ChannelPatch: typeof import("./channelPatch").ChannelPatch = null as any;
+utilities.lazyLoad(exports, ["ChannelPatch"], () => require("./channelPatch"));
+
 export { SubscriptionArgs } from "./subscription";
 export type Subscription = import("./subscription").Subscription;
 export const Subscription: typeof import("./subscription").Subscription = null as any;
 utilities.lazyLoad(exports, ["Subscription"], () => require("./subscription"));
+
+export { SubscriptionListArgs } from "./subscriptionList";
+export type SubscriptionList = import("./subscriptionList").SubscriptionList;
+export const SubscriptionList: typeof import("./subscriptionList").SubscriptionList = null as any;
+utilities.lazyLoad(exports, ["SubscriptionList"], () => require("./subscriptionList"));
+
+export { SubscriptionPatchArgs } from "./subscriptionPatch";
+export type SubscriptionPatch = import("./subscriptionPatch").SubscriptionPatch;
+export const SubscriptionPatch: typeof import("./subscriptionPatch").SubscriptionPatch = null as any;
+utilities.lazyLoad(exports, ["SubscriptionPatch"], () => require("./subscriptionPatch"));
 
 
 const _module = {
@@ -22,8 +42,16 @@ const _module = {
         switch (type) {
             case "kubernetes:messaging.knative.dev/v1:Channel":
                 return new Channel(name, <any>undefined, { urn })
+            case "kubernetes:messaging.knative.dev/v1:ChannelList":
+                return new ChannelList(name, <any>undefined, { urn })
+            case "kubernetes:messaging.knative.dev/v1:ChannelPatch":
+                return new ChannelPatch(name, <any>undefined, { urn })
             case "kubernetes:messaging.knative.dev/v1:Subscription":
                 return new Subscription(name, <any>undefined, { urn })
+            case "kubernetes:messaging.knative.dev/v1:SubscriptionList":
+                return new SubscriptionList(name, <any>undefined, { urn })
+            case "kubernetes:messaging.knative.dev/v1:SubscriptionPatch":
+                return new SubscriptionPatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

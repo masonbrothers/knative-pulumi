@@ -10,20 +10,60 @@ export type Certificate = import("./certificate").Certificate;
 export const Certificate: typeof import("./certificate").Certificate = null as any;
 utilities.lazyLoad(exports, ["Certificate"], () => require("./certificate"));
 
+export { CertificateListArgs } from "./certificateList";
+export type CertificateList = import("./certificateList").CertificateList;
+export const CertificateList: typeof import("./certificateList").CertificateList = null as any;
+utilities.lazyLoad(exports, ["CertificateList"], () => require("./certificateList"));
+
+export { CertificatePatchArgs } from "./certificatePatch";
+export type CertificatePatch = import("./certificatePatch").CertificatePatch;
+export const CertificatePatch: typeof import("./certificatePatch").CertificatePatch = null as any;
+utilities.lazyLoad(exports, ["CertificatePatch"], () => require("./certificatePatch"));
+
 export { ClusterDomainClaimArgs } from "./clusterDomainClaim";
 export type ClusterDomainClaim = import("./clusterDomainClaim").ClusterDomainClaim;
 export const ClusterDomainClaim: typeof import("./clusterDomainClaim").ClusterDomainClaim = null as any;
 utilities.lazyLoad(exports, ["ClusterDomainClaim"], () => require("./clusterDomainClaim"));
+
+export { ClusterDomainClaimListArgs } from "./clusterDomainClaimList";
+export type ClusterDomainClaimList = import("./clusterDomainClaimList").ClusterDomainClaimList;
+export const ClusterDomainClaimList: typeof import("./clusterDomainClaimList").ClusterDomainClaimList = null as any;
+utilities.lazyLoad(exports, ["ClusterDomainClaimList"], () => require("./clusterDomainClaimList"));
+
+export { ClusterDomainClaimPatchArgs } from "./clusterDomainClaimPatch";
+export type ClusterDomainClaimPatch = import("./clusterDomainClaimPatch").ClusterDomainClaimPatch;
+export const ClusterDomainClaimPatch: typeof import("./clusterDomainClaimPatch").ClusterDomainClaimPatch = null as any;
+utilities.lazyLoad(exports, ["ClusterDomainClaimPatch"], () => require("./clusterDomainClaimPatch"));
 
 export { IngressArgs } from "./ingress";
 export type Ingress = import("./ingress").Ingress;
 export const Ingress: typeof import("./ingress").Ingress = null as any;
 utilities.lazyLoad(exports, ["Ingress"], () => require("./ingress"));
 
+export { IngressListArgs } from "./ingressList";
+export type IngressList = import("./ingressList").IngressList;
+export const IngressList: typeof import("./ingressList").IngressList = null as any;
+utilities.lazyLoad(exports, ["IngressList"], () => require("./ingressList"));
+
+export { IngressPatchArgs } from "./ingressPatch";
+export type IngressPatch = import("./ingressPatch").IngressPatch;
+export const IngressPatch: typeof import("./ingressPatch").IngressPatch = null as any;
+utilities.lazyLoad(exports, ["IngressPatch"], () => require("./ingressPatch"));
+
 export { ServerlessServiceArgs } from "./serverlessService";
 export type ServerlessService = import("./serverlessService").ServerlessService;
 export const ServerlessService: typeof import("./serverlessService").ServerlessService = null as any;
 utilities.lazyLoad(exports, ["ServerlessService"], () => require("./serverlessService"));
+
+export { ServerlessServiceListArgs } from "./serverlessServiceList";
+export type ServerlessServiceList = import("./serverlessServiceList").ServerlessServiceList;
+export const ServerlessServiceList: typeof import("./serverlessServiceList").ServerlessServiceList = null as any;
+utilities.lazyLoad(exports, ["ServerlessServiceList"], () => require("./serverlessServiceList"));
+
+export { ServerlessServicePatchArgs } from "./serverlessServicePatch";
+export type ServerlessServicePatch = import("./serverlessServicePatch").ServerlessServicePatch;
+export const ServerlessServicePatch: typeof import("./serverlessServicePatch").ServerlessServicePatch = null as any;
+utilities.lazyLoad(exports, ["ServerlessServicePatch"], () => require("./serverlessServicePatch"));
 
 
 const _module = {
@@ -32,12 +72,28 @@ const _module = {
         switch (type) {
             case "kubernetes:networking.internal.knative.dev/v1alpha1:Certificate":
                 return new Certificate(name, <any>undefined, { urn })
+            case "kubernetes:networking.internal.knative.dev/v1alpha1:CertificateList":
+                return new CertificateList(name, <any>undefined, { urn })
+            case "kubernetes:networking.internal.knative.dev/v1alpha1:CertificatePatch":
+                return new CertificatePatch(name, <any>undefined, { urn })
             case "kubernetes:networking.internal.knative.dev/v1alpha1:ClusterDomainClaim":
                 return new ClusterDomainClaim(name, <any>undefined, { urn })
+            case "kubernetes:networking.internal.knative.dev/v1alpha1:ClusterDomainClaimList":
+                return new ClusterDomainClaimList(name, <any>undefined, { urn })
+            case "kubernetes:networking.internal.knative.dev/v1alpha1:ClusterDomainClaimPatch":
+                return new ClusterDomainClaimPatch(name, <any>undefined, { urn })
             case "kubernetes:networking.internal.knative.dev/v1alpha1:Ingress":
                 return new Ingress(name, <any>undefined, { urn })
+            case "kubernetes:networking.internal.knative.dev/v1alpha1:IngressList":
+                return new IngressList(name, <any>undefined, { urn })
+            case "kubernetes:networking.internal.knative.dev/v1alpha1:IngressPatch":
+                return new IngressPatch(name, <any>undefined, { urn })
             case "kubernetes:networking.internal.knative.dev/v1alpha1:ServerlessService":
                 return new ServerlessService(name, <any>undefined, { urn })
+            case "kubernetes:networking.internal.knative.dev/v1alpha1:ServerlessServiceList":
+                return new ServerlessServiceList(name, <any>undefined, { urn })
+            case "kubernetes:networking.internal.knative.dev/v1alpha1:ServerlessServicePatch":
+                return new ServerlessServicePatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

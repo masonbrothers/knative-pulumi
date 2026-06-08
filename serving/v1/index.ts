@@ -10,20 +10,60 @@ export type Configuration = import("./configuration").Configuration;
 export const Configuration: typeof import("./configuration").Configuration = null as any;
 utilities.lazyLoad(exports, ["Configuration"], () => require("./configuration"));
 
+export { ConfigurationListArgs } from "./configurationList";
+export type ConfigurationList = import("./configurationList").ConfigurationList;
+export const ConfigurationList: typeof import("./configurationList").ConfigurationList = null as any;
+utilities.lazyLoad(exports, ["ConfigurationList"], () => require("./configurationList"));
+
+export { ConfigurationPatchArgs } from "./configurationPatch";
+export type ConfigurationPatch = import("./configurationPatch").ConfigurationPatch;
+export const ConfigurationPatch: typeof import("./configurationPatch").ConfigurationPatch = null as any;
+utilities.lazyLoad(exports, ["ConfigurationPatch"], () => require("./configurationPatch"));
+
 export { RevisionArgs } from "./revision";
 export type Revision = import("./revision").Revision;
 export const Revision: typeof import("./revision").Revision = null as any;
 utilities.lazyLoad(exports, ["Revision"], () => require("./revision"));
+
+export { RevisionListArgs } from "./revisionList";
+export type RevisionList = import("./revisionList").RevisionList;
+export const RevisionList: typeof import("./revisionList").RevisionList = null as any;
+utilities.lazyLoad(exports, ["RevisionList"], () => require("./revisionList"));
+
+export { RevisionPatchArgs } from "./revisionPatch";
+export type RevisionPatch = import("./revisionPatch").RevisionPatch;
+export const RevisionPatch: typeof import("./revisionPatch").RevisionPatch = null as any;
+utilities.lazyLoad(exports, ["RevisionPatch"], () => require("./revisionPatch"));
 
 export { RouteArgs } from "./route";
 export type Route = import("./route").Route;
 export const Route: typeof import("./route").Route = null as any;
 utilities.lazyLoad(exports, ["Route"], () => require("./route"));
 
+export { RouteListArgs } from "./routeList";
+export type RouteList = import("./routeList").RouteList;
+export const RouteList: typeof import("./routeList").RouteList = null as any;
+utilities.lazyLoad(exports, ["RouteList"], () => require("./routeList"));
+
+export { RoutePatchArgs } from "./routePatch";
+export type RoutePatch = import("./routePatch").RoutePatch;
+export const RoutePatch: typeof import("./routePatch").RoutePatch = null as any;
+utilities.lazyLoad(exports, ["RoutePatch"], () => require("./routePatch"));
+
 export { ServiceArgs } from "./service";
 export type Service = import("./service").Service;
 export const Service: typeof import("./service").Service = null as any;
 utilities.lazyLoad(exports, ["Service"], () => require("./service"));
+
+export { ServiceListArgs } from "./serviceList";
+export type ServiceList = import("./serviceList").ServiceList;
+export const ServiceList: typeof import("./serviceList").ServiceList = null as any;
+utilities.lazyLoad(exports, ["ServiceList"], () => require("./serviceList"));
+
+export { ServicePatchArgs } from "./servicePatch";
+export type ServicePatch = import("./servicePatch").ServicePatch;
+export const ServicePatch: typeof import("./servicePatch").ServicePatch = null as any;
+utilities.lazyLoad(exports, ["ServicePatch"], () => require("./servicePatch"));
 
 
 const _module = {
@@ -32,12 +72,28 @@ const _module = {
         switch (type) {
             case "kubernetes:serving.knative.dev/v1:Configuration":
                 return new Configuration(name, <any>undefined, { urn })
+            case "kubernetes:serving.knative.dev/v1:ConfigurationList":
+                return new ConfigurationList(name, <any>undefined, { urn })
+            case "kubernetes:serving.knative.dev/v1:ConfigurationPatch":
+                return new ConfigurationPatch(name, <any>undefined, { urn })
             case "kubernetes:serving.knative.dev/v1:Revision":
                 return new Revision(name, <any>undefined, { urn })
+            case "kubernetes:serving.knative.dev/v1:RevisionList":
+                return new RevisionList(name, <any>undefined, { urn })
+            case "kubernetes:serving.knative.dev/v1:RevisionPatch":
+                return new RevisionPatch(name, <any>undefined, { urn })
             case "kubernetes:serving.knative.dev/v1:Route":
                 return new Route(name, <any>undefined, { urn })
+            case "kubernetes:serving.knative.dev/v1:RouteList":
+                return new RouteList(name, <any>undefined, { urn })
+            case "kubernetes:serving.knative.dev/v1:RoutePatch":
+                return new RoutePatch(name, <any>undefined, { urn })
             case "kubernetes:serving.knative.dev/v1:Service":
                 return new Service(name, <any>undefined, { urn })
+            case "kubernetes:serving.knative.dev/v1:ServiceList":
+                return new ServiceList(name, <any>undefined, { urn })
+            case "kubernetes:serving.knative.dev/v1:ServicePatch":
+                return new ServicePatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

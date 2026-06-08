@@ -6,8 +6,6 @@ import * as inputs from "../../types/input";
 import * as outputs from "../../types/output";
 import * as utilities from "../../utilities";
 
-import {ObjectMeta} from "../../meta/v1";
-
 /**
  * Service acts as a top-level container that manages a Route and Configuration
  * which implement a network service. Service exists to provide a singular
@@ -21,6 +19,23 @@ import {ObjectMeta} from "../../meta/v1";
  * and Route, reflecting their statuses and conditions as its own.
  *
  * See also: https://github.com/knative/serving/blob/main/docs/spec/overview.md#service
+ *
+ * This resource waits until its status is ready before registering success
+ * for create/update, and populating output properties from the current state of the resource.
+ * The following conditions are used to determine whether the resource creation has
+ * succeeded or failed:
+ *
+ * 1. Service object exists.
+ * 2. Related Endpoint objects are created. Each time we get an update, wait 10 seconds
+ *    for any stragglers.
+ * 3. There are no "not ready" endpoints -- unless the Service is an "empty
+ *    headless" Service [1], a Service with '.spec.type: ExternalName', or a Service
+ *    without a selector.
+ * 4. External IP address is allocated (if Service has '.spec.type: LoadBalancer').
+ *
+ * If the Service has not reached a Ready state after 10 minutes, it will
+ * time out and mark the resource update as Failed. You can override the default timeout value
+ * by setting the 'customTimeouts' option on the resource.
  */
 export class Service extends pulumi.CustomResource {
     /**
@@ -49,23 +64,20 @@ export class Service extends pulumi.CustomResource {
         return obj['__pulumiType'] === Service.__pulumiType;
     }
 
-    public readonly apiVersion!: pulumi.Output<"serving.knative.dev/v1" | undefined>;
-    public readonly kind!: pulumi.Output<"Service" | undefined>;
-    public readonly metadata!: pulumi.Output<ObjectMeta | undefined>;
     /**
-     * ServiceSpec represents the configuration for the Service object.
-     * A Service's specification is the union of the specifications for a Route
-     * and Configuration.  The Service restricts what can be expressed in these
-     * fields, e.g. the Route must reference the provided Configuration;
-     * however, these limitations also enable friendlier defaulting,
-     * e.g. Route never needs a Configuration name, and may be defaulted to
-     * the appropriate "run latest" spec.
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
      */
-    public readonly spec!: pulumi.Output<outputs.serving.v1.ServiceSpec | undefined>;
+    declare public readonly apiVersion: pulumi.Output<"serving.knative.dev/v1">;
     /**
-     * ServiceStatus represents the Status stanza of the Service resource.
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
      */
-    public readonly status!: pulumi.Output<outputs.serving.v1.ServiceStatus | undefined>;
+    declare public readonly kind: pulumi.Output<"Service">;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    declare public readonly metadata: pulumi.Output<outputs.meta.v1.ObjectMeta>;
+    declare public readonly spec: pulumi.Output<outputs.serving.v1.ServiceSpec>;
+    declare public /*out*/ readonly status: pulumi.Output<outputs.serving.v1.ServiceStatus>;
 
     /**
      * Create a Service resource with the given unique name, arguments, and options.
@@ -80,9 +92,9 @@ export class Service extends pulumi.CustomResource {
         if (!opts.id) {
             resourceInputs["apiVersion"] = "serving.knative.dev/v1";
             resourceInputs["kind"] = "Service";
-            resourceInputs["metadata"] = args ? args.metadata : undefined;
-            resourceInputs["spec"] = args ? args.spec : undefined;
-            resourceInputs["status"] = args ? args.status : undefined;
+            resourceInputs["metadata"] = args?.metadata;
+            resourceInputs["spec"] = args?.spec;
+            resourceInputs["status"] = undefined /*out*/;
         } else {
             resourceInputs["apiVersion"] = undefined /*out*/;
             resourceInputs["kind"] = undefined /*out*/;
@@ -99,21 +111,17 @@ export class Service extends pulumi.CustomResource {
  * The set of arguments for constructing a Service resource.
  */
 export interface ServiceArgs {
-    apiVersion?: pulumi.Input<"serving.knative.dev/v1">;
-    kind?: pulumi.Input<"Service">;
-    metadata?: pulumi.Input<ObjectMeta>;
     /**
-     * ServiceSpec represents the configuration for the Service object.
-     * A Service's specification is the union of the specifications for a Route
-     * and Configuration.  The Service restricts what can be expressed in these
-     * fields, e.g. the Route must reference the provided Configuration;
-     * however, these limitations also enable friendlier defaulting,
-     * e.g. Route never needs a Configuration name, and may be defaulted to
-     * the appropriate "run latest" spec.
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
      */
-    spec?: pulumi.Input<inputs.serving.v1.ServiceSpecArgs>;
+    apiVersion?: pulumi.Input<"serving.knative.dev/v1" | undefined>;
     /**
-     * ServiceStatus represents the Status stanza of the Service resource.
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
      */
-    status?: pulumi.Input<inputs.serving.v1.ServiceStatusArgs>;
+    kind?: pulumi.Input<"Service" | undefined>;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    metadata?: pulumi.Input<inputs.meta.v1.ObjectMeta | undefined>;
+    spec?: pulumi.Input<inputs.serving.v1.ServiceSpec | undefined>;
 }

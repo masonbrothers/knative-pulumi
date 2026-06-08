@@ -6,8 +6,6 @@ import * as inputs from "../../types/input";
 import * as outputs from "../../types/output";
 import * as utilities from "../../utilities";
 
-import {ObjectMeta} from "../../meta/v1";
-
 /**
  * Subscription routes events received on a Channel to a DNS name and corresponds to the subscriptions.channels.knative.dev CRD.
  */
@@ -38,11 +36,20 @@ export class Subscription extends pulumi.CustomResource {
         return obj['__pulumiType'] === Subscription.__pulumiType;
     }
 
-    public readonly apiVersion!: pulumi.Output<"messaging.knative.dev/v1" | undefined>;
-    public readonly kind!: pulumi.Output<"Subscription" | undefined>;
-    public readonly metadata!: pulumi.Output<ObjectMeta | undefined>;
-    public readonly spec!: pulumi.Output<outputs.messaging.v1.SubscriptionSpec | undefined>;
-    public readonly status!: pulumi.Output<outputs.messaging.v1.SubscriptionStatus | undefined>;
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    declare public readonly apiVersion: pulumi.Output<"messaging.knative.dev/v1">;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    declare public readonly kind: pulumi.Output<"Subscription">;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    declare public readonly metadata: pulumi.Output<outputs.meta.v1.ObjectMeta>;
+    declare public readonly spec: pulumi.Output<outputs.messaging.v1.SubscriptionSpec>;
+    declare public /*out*/ readonly status: pulumi.Output<outputs.messaging.v1.SubscriptionStatus>;
 
     /**
      * Create a Subscription resource with the given unique name, arguments, and options.
@@ -57,9 +64,9 @@ export class Subscription extends pulumi.CustomResource {
         if (!opts.id) {
             resourceInputs["apiVersion"] = "messaging.knative.dev/v1";
             resourceInputs["kind"] = "Subscription";
-            resourceInputs["metadata"] = args ? args.metadata : undefined;
-            resourceInputs["spec"] = args ? args.spec : undefined;
-            resourceInputs["status"] = args ? args.status : undefined;
+            resourceInputs["metadata"] = args?.metadata;
+            resourceInputs["spec"] = args?.spec;
+            resourceInputs["status"] = undefined /*out*/;
         } else {
             resourceInputs["apiVersion"] = undefined /*out*/;
             resourceInputs["kind"] = undefined /*out*/;
@@ -76,9 +83,17 @@ export class Subscription extends pulumi.CustomResource {
  * The set of arguments for constructing a Subscription resource.
  */
 export interface SubscriptionArgs {
-    apiVersion?: pulumi.Input<"messaging.knative.dev/v1">;
-    kind?: pulumi.Input<"Subscription">;
-    metadata?: pulumi.Input<ObjectMeta>;
-    spec?: pulumi.Input<inputs.messaging.v1.SubscriptionSpecArgs>;
-    status?: pulumi.Input<inputs.messaging.v1.SubscriptionStatusArgs>;
+    /**
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+     */
+    apiVersion?: pulumi.Input<"messaging.knative.dev/v1" | undefined>;
+    /**
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     */
+    kind?: pulumi.Input<"Subscription" | undefined>;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    metadata?: pulumi.Input<inputs.meta.v1.ObjectMeta | undefined>;
+    spec?: pulumi.Input<inputs.messaging.v1.SubscriptionSpec | undefined>;
 }

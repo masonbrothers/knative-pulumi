@@ -6,8 +6,6 @@ import * as inputs from "../../types/input";
 import * as outputs from "../../types/output";
 import * as utilities from "../../utilities";
 
-import {ObjectMeta} from "../../meta/v1";
-
 export class EventPolicy extends pulumi.CustomResource {
     /**
      * Get an existing EventPolicy resource's state with the given name, ID, and optional extra
@@ -35,17 +33,20 @@ export class EventPolicy extends pulumi.CustomResource {
         return obj['__pulumiType'] === EventPolicy.__pulumiType;
     }
 
-    public readonly apiVersion!: pulumi.Output<"eventing.knative.dev/v1alpha1" | undefined>;
-    public readonly kind!: pulumi.Output<"EventPolicy" | undefined>;
-    public readonly metadata!: pulumi.Output<ObjectMeta | undefined>;
     /**
-     * Spec defines the desired state of the EventPolicy.
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
      */
-    public readonly spec!: pulumi.Output<outputs.eventing.v1alpha1.EventPolicySpec | undefined>;
+    declare public readonly apiVersion: pulumi.Output<"eventing.knative.dev/v1alpha1">;
     /**
-     * Status represents the current state of the EventPolicy. This data may be out of date.
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
      */
-    public readonly status!: pulumi.Output<outputs.eventing.v1alpha1.EventPolicyStatus | undefined>;
+    declare public readonly kind: pulumi.Output<"EventPolicy">;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    declare public readonly metadata: pulumi.Output<outputs.meta.v1.ObjectMeta>;
+    declare public readonly spec: pulumi.Output<outputs.eventing.v1alpha1.EventPolicySpec>;
+    declare public /*out*/ readonly status: pulumi.Output<outputs.eventing.v1alpha1.EventPolicyStatus>;
 
     /**
      * Create a EventPolicy resource with the given unique name, arguments, and options.
@@ -60,9 +61,9 @@ export class EventPolicy extends pulumi.CustomResource {
         if (!opts.id) {
             resourceInputs["apiVersion"] = "eventing.knative.dev/v1alpha1";
             resourceInputs["kind"] = "EventPolicy";
-            resourceInputs["metadata"] = args ? args.metadata : undefined;
-            resourceInputs["spec"] = args ? args.spec : undefined;
-            resourceInputs["status"] = args ? args.status : undefined;
+            resourceInputs["metadata"] = args?.metadata;
+            resourceInputs["spec"] = args?.spec;
+            resourceInputs["status"] = undefined /*out*/;
         } else {
             resourceInputs["apiVersion"] = undefined /*out*/;
             resourceInputs["kind"] = undefined /*out*/;
@@ -79,15 +80,17 @@ export class EventPolicy extends pulumi.CustomResource {
  * The set of arguments for constructing a EventPolicy resource.
  */
 export interface EventPolicyArgs {
-    apiVersion?: pulumi.Input<"eventing.knative.dev/v1alpha1">;
-    kind?: pulumi.Input<"EventPolicy">;
-    metadata?: pulumi.Input<ObjectMeta>;
     /**
-     * Spec defines the desired state of the EventPolicy.
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
      */
-    spec?: pulumi.Input<inputs.eventing.v1alpha1.EventPolicySpecArgs>;
+    apiVersion?: pulumi.Input<"eventing.knative.dev/v1alpha1" | undefined>;
     /**
-     * Status represents the current state of the EventPolicy. This data may be out of date.
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
      */
-    status?: pulumi.Input<inputs.eventing.v1alpha1.EventPolicyStatusArgs>;
+    kind?: pulumi.Input<"EventPolicy" | undefined>;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    metadata?: pulumi.Input<inputs.meta.v1.ObjectMeta | undefined>;
+    spec?: pulumi.Input<inputs.eventing.v1alpha1.EventPolicySpec | undefined>;
 }

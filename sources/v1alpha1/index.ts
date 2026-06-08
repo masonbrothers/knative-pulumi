@@ -10,6 +10,16 @@ export type IntegrationSource = import("./integrationSource").IntegrationSource;
 export const IntegrationSource: typeof import("./integrationSource").IntegrationSource = null as any;
 utilities.lazyLoad(exports, ["IntegrationSource"], () => require("./integrationSource"));
 
+export { IntegrationSourceListArgs } from "./integrationSourceList";
+export type IntegrationSourceList = import("./integrationSourceList").IntegrationSourceList;
+export const IntegrationSourceList: typeof import("./integrationSourceList").IntegrationSourceList = null as any;
+utilities.lazyLoad(exports, ["IntegrationSourceList"], () => require("./integrationSourceList"));
+
+export { IntegrationSourcePatchArgs } from "./integrationSourcePatch";
+export type IntegrationSourcePatch = import("./integrationSourcePatch").IntegrationSourcePatch;
+export const IntegrationSourcePatch: typeof import("./integrationSourcePatch").IntegrationSourcePatch = null as any;
+utilities.lazyLoad(exports, ["IntegrationSourcePatch"], () => require("./integrationSourcePatch"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -17,6 +27,10 @@ const _module = {
         switch (type) {
             case "kubernetes:sources.knative.dev/v1alpha1:IntegrationSource":
                 return new IntegrationSource(name, <any>undefined, { urn })
+            case "kubernetes:sources.knative.dev/v1alpha1:IntegrationSourceList":
+                return new IntegrationSourceList(name, <any>undefined, { urn })
+            case "kubernetes:sources.knative.dev/v1alpha1:IntegrationSourcePatch":
+                return new IntegrationSourcePatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

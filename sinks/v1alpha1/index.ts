@@ -10,10 +10,30 @@ export type IntegrationSink = import("./integrationSink").IntegrationSink;
 export const IntegrationSink: typeof import("./integrationSink").IntegrationSink = null as any;
 utilities.lazyLoad(exports, ["IntegrationSink"], () => require("./integrationSink"));
 
+export { IntegrationSinkListArgs } from "./integrationSinkList";
+export type IntegrationSinkList = import("./integrationSinkList").IntegrationSinkList;
+export const IntegrationSinkList: typeof import("./integrationSinkList").IntegrationSinkList = null as any;
+utilities.lazyLoad(exports, ["IntegrationSinkList"], () => require("./integrationSinkList"));
+
+export { IntegrationSinkPatchArgs } from "./integrationSinkPatch";
+export type IntegrationSinkPatch = import("./integrationSinkPatch").IntegrationSinkPatch;
+export const IntegrationSinkPatch: typeof import("./integrationSinkPatch").IntegrationSinkPatch = null as any;
+utilities.lazyLoad(exports, ["IntegrationSinkPatch"], () => require("./integrationSinkPatch"));
+
 export { JobSinkArgs } from "./jobSink";
 export type JobSink = import("./jobSink").JobSink;
 export const JobSink: typeof import("./jobSink").JobSink = null as any;
 utilities.lazyLoad(exports, ["JobSink"], () => require("./jobSink"));
+
+export { JobSinkListArgs } from "./jobSinkList";
+export type JobSinkList = import("./jobSinkList").JobSinkList;
+export const JobSinkList: typeof import("./jobSinkList").JobSinkList = null as any;
+utilities.lazyLoad(exports, ["JobSinkList"], () => require("./jobSinkList"));
+
+export { JobSinkPatchArgs } from "./jobSinkPatch";
+export type JobSinkPatch = import("./jobSinkPatch").JobSinkPatch;
+export const JobSinkPatch: typeof import("./jobSinkPatch").JobSinkPatch = null as any;
+utilities.lazyLoad(exports, ["JobSinkPatch"], () => require("./jobSinkPatch"));
 
 
 const _module = {
@@ -22,8 +42,16 @@ const _module = {
         switch (type) {
             case "kubernetes:sinks.knative.dev/v1alpha1:IntegrationSink":
                 return new IntegrationSink(name, <any>undefined, { urn })
+            case "kubernetes:sinks.knative.dev/v1alpha1:IntegrationSinkList":
+                return new IntegrationSinkList(name, <any>undefined, { urn })
+            case "kubernetes:sinks.knative.dev/v1alpha1:IntegrationSinkPatch":
+                return new IntegrationSinkPatch(name, <any>undefined, { urn })
             case "kubernetes:sinks.knative.dev/v1alpha1:JobSink":
                 return new JobSink(name, <any>undefined, { urn })
+            case "kubernetes:sinks.knative.dev/v1alpha1:JobSinkList":
+                return new JobSinkList(name, <any>undefined, { urn })
+            case "kubernetes:sinks.knative.dev/v1alpha1:JobSinkPatch":
+                return new JobSinkPatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

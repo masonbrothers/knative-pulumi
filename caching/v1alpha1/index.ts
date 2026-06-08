@@ -10,6 +10,16 @@ export type Image = import("./image").Image;
 export const Image: typeof import("./image").Image = null as any;
 utilities.lazyLoad(exports, ["Image"], () => require("./image"));
 
+export { ImageListArgs } from "./imageList";
+export type ImageList = import("./imageList").ImageList;
+export const ImageList: typeof import("./imageList").ImageList = null as any;
+utilities.lazyLoad(exports, ["ImageList"], () => require("./imageList"));
+
+export { ImagePatchArgs } from "./imagePatch";
+export type ImagePatch = import("./imagePatch").ImagePatch;
+export const ImagePatch: typeof import("./imagePatch").ImagePatch = null as any;
+utilities.lazyLoad(exports, ["ImagePatch"], () => require("./imagePatch"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -17,6 +27,10 @@ const _module = {
         switch (type) {
             case "kubernetes:caching.internal.knative.dev/v1alpha1:Image":
                 return new Image(name, <any>undefined, { urn })
+            case "kubernetes:caching.internal.knative.dev/v1alpha1:ImageList":
+                return new ImageList(name, <any>undefined, { urn })
+            case "kubernetes:caching.internal.knative.dev/v1alpha1:ImagePatch":
+                return new ImagePatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

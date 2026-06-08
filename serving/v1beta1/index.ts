@@ -10,6 +10,16 @@ export type DomainMapping = import("./domainMapping").DomainMapping;
 export const DomainMapping: typeof import("./domainMapping").DomainMapping = null as any;
 utilities.lazyLoad(exports, ["DomainMapping"], () => require("./domainMapping"));
 
+export { DomainMappingListArgs } from "./domainMappingList";
+export type DomainMappingList = import("./domainMappingList").DomainMappingList;
+export const DomainMappingList: typeof import("./domainMappingList").DomainMappingList = null as any;
+utilities.lazyLoad(exports, ["DomainMappingList"], () => require("./domainMappingList"));
+
+export { DomainMappingPatchArgs } from "./domainMappingPatch";
+export type DomainMappingPatch = import("./domainMappingPatch").DomainMappingPatch;
+export const DomainMappingPatch: typeof import("./domainMappingPatch").DomainMappingPatch = null as any;
+utilities.lazyLoad(exports, ["DomainMappingPatch"], () => require("./domainMappingPatch"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -17,6 +27,10 @@ const _module = {
         switch (type) {
             case "kubernetes:serving.knative.dev/v1beta1:DomainMapping":
                 return new DomainMapping(name, <any>undefined, { urn })
+            case "kubernetes:serving.knative.dev/v1beta1:DomainMappingList":
+                return new DomainMappingList(name, <any>undefined, { urn })
+            case "kubernetes:serving.knative.dev/v1beta1:DomainMappingPatch":
+                return new DomainMappingPatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

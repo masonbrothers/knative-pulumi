@@ -6,8 +6,6 @@ import * as inputs from "../../types/input";
 import * as outputs from "../../types/output";
 import * as utilities from "../../utilities";
 
-import {ObjectMeta} from "../../meta/v1";
-
 /**
  * PingSource describes an event source with a fixed payload produced on a specified cron schedule.
  */
@@ -38,17 +36,20 @@ export class PingSource extends pulumi.CustomResource {
         return obj['__pulumiType'] === PingSource.__pulumiType;
     }
 
-    public readonly apiVersion!: pulumi.Output<"sources.knative.dev/v1beta2" | undefined>;
-    public readonly kind!: pulumi.Output<"PingSource" | undefined>;
-    public readonly metadata!: pulumi.Output<ObjectMeta | undefined>;
     /**
-     * PingSourceSpec defines the desired state of the PingSource (from the client).
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
      */
-    public readonly spec!: pulumi.Output<outputs.sources.v1beta2.PingSourceSpec | undefined>;
+    declare public readonly apiVersion: pulumi.Output<"sources.knative.dev/v1beta2">;
     /**
-     * PingSourceStatus defines the observed state of PingSource (from the controller).
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
      */
-    public readonly status!: pulumi.Output<outputs.sources.v1beta2.PingSourceStatus | undefined>;
+    declare public readonly kind: pulumi.Output<"PingSource">;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    declare public readonly metadata: pulumi.Output<outputs.meta.v1.ObjectMeta>;
+    declare public readonly spec: pulumi.Output<outputs.sources.v1beta2.PingSourceSpec>;
+    declare public /*out*/ readonly status: pulumi.Output<outputs.sources.v1beta2.PingSourceStatus>;
 
     /**
      * Create a PingSource resource with the given unique name, arguments, and options.
@@ -63,9 +64,9 @@ export class PingSource extends pulumi.CustomResource {
         if (!opts.id) {
             resourceInputs["apiVersion"] = "sources.knative.dev/v1beta2";
             resourceInputs["kind"] = "PingSource";
-            resourceInputs["metadata"] = args ? args.metadata : undefined;
-            resourceInputs["spec"] = args ? args.spec : undefined;
-            resourceInputs["status"] = args ? args.status : undefined;
+            resourceInputs["metadata"] = args?.metadata;
+            resourceInputs["spec"] = args?.spec;
+            resourceInputs["status"] = undefined /*out*/;
         } else {
             resourceInputs["apiVersion"] = undefined /*out*/;
             resourceInputs["kind"] = undefined /*out*/;
@@ -74,6 +75,8 @@ export class PingSource extends pulumi.CustomResource {
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const aliasOpts = { aliases: [{ type: "kubernetes:sources.knative.dev/v1:PingSource" }] };
+        opts = pulumi.mergeOptions(opts, aliasOpts);
         super(PingSource.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -82,15 +85,17 @@ export class PingSource extends pulumi.CustomResource {
  * The set of arguments for constructing a PingSource resource.
  */
 export interface PingSourceArgs {
-    apiVersion?: pulumi.Input<"sources.knative.dev/v1beta2">;
-    kind?: pulumi.Input<"PingSource">;
-    metadata?: pulumi.Input<ObjectMeta>;
     /**
-     * PingSourceSpec defines the desired state of the PingSource (from the client).
+     * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
      */
-    spec?: pulumi.Input<inputs.sources.v1beta2.PingSourceSpecArgs>;
+    apiVersion?: pulumi.Input<"sources.knative.dev/v1beta2" | undefined>;
     /**
-     * PingSourceStatus defines the observed state of PingSource (from the controller).
+     * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
      */
-    status?: pulumi.Input<inputs.sources.v1beta2.PingSourceStatusArgs>;
+    kind?: pulumi.Input<"PingSource" | undefined>;
+    /**
+     * Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    metadata?: pulumi.Input<inputs.meta.v1.ObjectMeta | undefined>;
+    spec?: pulumi.Input<inputs.sources.v1beta2.PingSourceSpec | undefined>;
 }

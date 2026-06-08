@@ -10,10 +10,30 @@ export type Broker = import("./broker").Broker;
 export const Broker: typeof import("./broker").Broker = null as any;
 utilities.lazyLoad(exports, ["Broker"], () => require("./broker"));
 
+export { BrokerListArgs } from "./brokerList";
+export type BrokerList = import("./brokerList").BrokerList;
+export const BrokerList: typeof import("./brokerList").BrokerList = null as any;
+utilities.lazyLoad(exports, ["BrokerList"], () => require("./brokerList"));
+
+export { BrokerPatchArgs } from "./brokerPatch";
+export type BrokerPatch = import("./brokerPatch").BrokerPatch;
+export const BrokerPatch: typeof import("./brokerPatch").BrokerPatch = null as any;
+utilities.lazyLoad(exports, ["BrokerPatch"], () => require("./brokerPatch"));
+
 export { TriggerArgs } from "./trigger";
 export type Trigger = import("./trigger").Trigger;
 export const Trigger: typeof import("./trigger").Trigger = null as any;
 utilities.lazyLoad(exports, ["Trigger"], () => require("./trigger"));
+
+export { TriggerListArgs } from "./triggerList";
+export type TriggerList = import("./triggerList").TriggerList;
+export const TriggerList: typeof import("./triggerList").TriggerList = null as any;
+utilities.lazyLoad(exports, ["TriggerList"], () => require("./triggerList"));
+
+export { TriggerPatchArgs } from "./triggerPatch";
+export type TriggerPatch = import("./triggerPatch").TriggerPatch;
+export const TriggerPatch: typeof import("./triggerPatch").TriggerPatch = null as any;
+utilities.lazyLoad(exports, ["TriggerPatch"], () => require("./triggerPatch"));
 
 
 const _module = {
@@ -22,8 +42,16 @@ const _module = {
         switch (type) {
             case "kubernetes:eventing.knative.dev/v1:Broker":
                 return new Broker(name, <any>undefined, { urn })
+            case "kubernetes:eventing.knative.dev/v1:BrokerList":
+                return new BrokerList(name, <any>undefined, { urn })
+            case "kubernetes:eventing.knative.dev/v1:BrokerPatch":
+                return new BrokerPatch(name, <any>undefined, { urn })
             case "kubernetes:eventing.knative.dev/v1:Trigger":
                 return new Trigger(name, <any>undefined, { urn })
+            case "kubernetes:eventing.knative.dev/v1:TriggerList":
+                return new TriggerList(name, <any>undefined, { urn })
+            case "kubernetes:eventing.knative.dev/v1:TriggerPatch":
+                return new TriggerPatch(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
